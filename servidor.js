@@ -1,5 +1,8 @@
 const http = require("node:http");
 const { cifrar, decifrar, decifrarForcaBruta } = require("./cifra");
+const { especificacao, paginaSwagger } = require("./swagger");
+
+const rotasPost = ["/cifrar", "/decifrar", "/decifrarForcaBruta"];
 
 function responder(res, status, dados) {
     res.writeHead(status, {
@@ -11,7 +14,16 @@ function responder(res, status, dados) {
 const servidor = http.createServer(async (req, res) => {
     const rota = req.url;
 
-    if (!["/cifrar", "/decifrar", "/decifrarForcaBruta"].includes(rota)) {
+    if (req.method === "GET" && rota === "/swagger.json") {
+        return responder(res, 200, especificacao);
+    }
+
+    if (req.method === "GET" && (rota === "/docs" || rota === "/docs/")) {
+        res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+        return res.end(paginaSwagger());
+    }
+
+    if (!rotasPost.includes(rota)) {
         return responder(res, 404, { erro: "Rota não encontrada." });
     }
 
@@ -64,6 +76,9 @@ const servidor = http.createServer(async (req, res) => {
     });
 });
 
-servidor.listen(3000, "127.0.0.1", () => {
-    console.log("API rodando em http://127.0.0.1:3000");
+const porta = Number(process.env.PORT) || 3000;
+
+servidor.listen(porta, "127.0.0.1", () => {
+    console.log(`API rodando em http://127.0.0.1:${porta}`);
+    console.log(`Documentação em http://127.0.0.1:${porta}/docs`);
 });
