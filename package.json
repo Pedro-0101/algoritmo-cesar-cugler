@@ -1,0 +1,13 @@
+{
+  "name": "algoritmo-cesar-cugler",
+  "version": "1.0.0",
+  "private": true,
+  "description": "API da Cifra de César com decifragem por força bruta",
+  "main": "servidor.js",
+  "scripts": {
+    "start": "node servidor.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

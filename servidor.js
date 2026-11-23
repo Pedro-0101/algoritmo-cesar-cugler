@@ -77,8 +77,9 @@ const servidor = http.createServer(async (req, res) => {
 });
 
 const porta = Number(process.env.PORT) || 3000;
+const host = process.env.HOST || "0.0.0.0";
 
-servidor.listen(porta, "127.0.0.1", () => {
-    console.log(`API rodando em http://127.0.0.1:${porta}`);
-    console.log(`Documentação em http://127.0.0.1:${porta}/docs`);
+servidor.listen(porta, host, () => {
+    console.log(`API rodando em http://localhost:${porta}`);
+    console.log(`Documentação em http://localhost:${porta}/docs`);
 });
