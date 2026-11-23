@@ -16,9 +16,3 @@ API da Cifra de César feita com Node.js puro (sem dependências).
 
 4. Abra o navegador em <http://127.0.0.1:3000/docs>.
 5. Para parar o servidor, aperte **Ctrl + C** no terminal.
-
-## Documentação (Swagger)
-
-Com o servidor rodando, acesse:
-
-- `http://127.0.0.1:3000/docs` — interface do Swagger UI
